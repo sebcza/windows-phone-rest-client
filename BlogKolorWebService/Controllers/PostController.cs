@@ -16,14 +16,14 @@ namespace BlogKolorWebService.Controllers
         {
             posts.Add(new Post()
             {
-                Id = 1,
+                Id = Guid.NewGuid().ToString(),
                 Author = "Sebcza",
                 Title = "Tytul",
                 Content = "Lorem ipsum"
             });
             posts.Add(new Post()
             {
-                Id=2,
+                Id=Guid.NewGuid().ToString(),
                 Content = "Lorem ipsum2",
                 Title = "Tytul2",
                 Author = "Andrzej"
@@ -38,9 +38,9 @@ namespace BlogKolorWebService.Controllers
         }
 
         // GET: api/Post/5
-        public Post Get(int id)
+        public Post Get(string id)
         {
-            return posts.FirstOrDefault(x=>x.Id == id);
+            return posts.FirstOrDefault(x=>String.Equals(x.Id,id));
         }
 
         // POST: api/Post
@@ -49,9 +49,9 @@ namespace BlogKolorWebService.Controllers
             posts.Add(post);
         }
 
-        public void Put(int id, Post post)
+        public void Put(string id, Post post)
         {
-            var postToEdit = posts.SingleOrDefault(x => x.Id == id);
+            var postToEdit = posts.SingleOrDefault(x => String.Equals(x.Id, id));
             var indexPostToEdit = posts.IndexOf(postToEdit);
             posts[indexPostToEdit] = post;
 
@@ -59,9 +59,9 @@ namespace BlogKolorWebService.Controllers
 
 
         // DELETE: api/Post/5
-        public void Delete(int id)
+        public void Delete(string id)
         {
-            posts.Remove(posts.FirstOrDefault(x=>x.Id==id));
+            posts.Remove(posts.FirstOrDefault(x=>String.Equals(x.Id,id)));
         }
     }
 }

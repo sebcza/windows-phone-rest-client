@@ -1,0 +1,28 @@
+namespace BlogKolorWebService.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class InitMigration : DbMigration
+    {
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.Posts",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Title = c.String(),
+                        Content = c.String(),
+                        Author = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+        }
+        
+        public override void Down()
+        {
+            DropTable("dbo.Posts");
+        }
+    }
+}
