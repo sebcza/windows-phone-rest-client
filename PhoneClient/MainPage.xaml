@@ -9,16 +9,21 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <StackPanel>
-            <Button Name="DodajBtn">Dodaj</Button>
-            <ListBox Name="ListBoxPost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Title}"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="4*" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="DodajBtn_Click" Name="DodajBtn">Dodaj</Button>
+        <ListBox Grid.Row="1" Name="ListBoxPost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ListBox.ItemTemplate >
+                <DataTemplate>
+                    <Grid Height="50">
+                        <TextBlock FontSize="16" VerticalAlignment="Center" Text="{Binding Title}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
     </Grid>
 </Page>
