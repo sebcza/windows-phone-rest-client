@@ -24,13 +24,14 @@ namespace PhoneClient
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Dodaj : Page
+    public sealed partial class Edytuj : Page
     {
-        public Dodaj()
+        public Edytuj()
         {
             this.InitializeComponent();
         }
 
+        private Post activePost;
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -38,22 +39,26 @@ namespace PhoneClient
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            activePost = MainPage.selectedPost;
+            TitleTextBox.Text = activePost.Title;
+            ContenTextBox.Text = activePost.Content;
+            AuthorTextBox.Text = activePost.Author;
         }
 
         private void ZapiszBtnClick(object sender, RoutedEventArgs e)
         {
             
-            var newPost = new Post();
-            newPost.Id = Guid.NewGuid().ToString();
-            newPost.Title = TitleTextBox.Text;
-            newPost.Content = ContenTextBox.Text;
-            newPost.Author = AuthorTextBox.Text;
+            activePost.Title = TitleTextBox.Text;
+            activePost.Content = ContenTextBox.Text;
+            activePost.Author = AuthorTextBox.Text;
 
             var client = new HttpClient();
 
-            var httpContent = new StringContent(JsonConvert.SerializeObject(newPost), Encoding.UTF8, "application/json");
-            var result = client.PostAsync("http://knkolorblog.azurewebsites.net/api/blog", httpContent).Result;
-            
+            var httpContent = new StringContent(JsonConvert.SerializeObject(activePost), Encoding.UTF8, "application/json");
+            var result = client.PutAsync("http://knkolorblog.azurewebsites.net/api/blog/"+activePost.Id, httpContent).Result;
+
+            Frame.Navigate(typeof (MainPage));
+
         }
     }
 }

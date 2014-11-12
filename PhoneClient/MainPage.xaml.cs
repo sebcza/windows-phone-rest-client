@@ -35,11 +35,13 @@ namespace PhoneClient
 
         }
 
+        public static Post selectedPost;
+
         public void GetPosts()
         {
             var client = new HttpClient();
             var result = client
-                .GetAsync("http://knkolorblog.azurewebsites.net/api/post")
+                .GetAsync("http://knkolorblog.azurewebsites.net/api/blog")
                 .Result.Content.ReadAsStringAsync();
             var res = result.Result;
             var posts = JsonConvert.DeserializeObject<List<Post>>(res);
@@ -64,6 +66,13 @@ namespace PhoneClient
         private void DodajBtn_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof (Dodaj));
+        }
+
+        private void ListBoxPost_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedPost = (Post)ListBoxPost.SelectedItem;
+            Frame.Navigate(typeof (Szczegoly));
+
         }
     }
 }

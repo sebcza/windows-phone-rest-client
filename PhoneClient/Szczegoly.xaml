@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="PhoneClient.Szczegoly"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PhoneClient"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="21,13,0,0">
+            <TextBlock TextWrapping="Wrap" Text="Title" Name="TitleTextBlock"  FontSize="36" FontFamily="Segoe WP Black" />
+            <TextBlock Text="Author" Name="AuthorTextBlock"/>
+        </StackPanel>
+        <TextBlock Name="ContenTextBlock" VerticalAlignment="Stretch" TextWrapping="Wrap" HorizontalAlignment="Stretch" Grid.Row="1" Text="Tresc" Padding="10"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Click="UsunBtnClick">Usuń</Button>
+            <Button Click="EdytujBtnClick">Edytuj</Button>
+        </StackPanel>
+    </Grid>
+</Page>
